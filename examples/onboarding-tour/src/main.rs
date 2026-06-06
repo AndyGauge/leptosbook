@@ -9,7 +9,7 @@ use std::sync::Arc;
 
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Step {

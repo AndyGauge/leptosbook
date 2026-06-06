@@ -5,7 +5,7 @@ pattern.
 
 ```rust
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Photo { url: &'static str, caption: &'static str }

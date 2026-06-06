@@ -1,10 +1,10 @@
 [package]
-name = "leptoskit"
+name = "leptosbook"
 version = "0.1.0"
 edition = "2021"
 description = "SvelteKit-inspired UI primitives for Leptos — gestures, book navigation, context-driven components"
-repository = "https://github.com/andygauge/leptoskit"
-documentation = "https://docs.rs/leptoskit"
+repository = "https://github.com/andygauge/leptosbook"
+documentation = "https://docs.rs/leptosbook"
 license = "MIT OR Apache-2.0"
 keywords = ["leptos", "ui", "gestures", "pagination", "book"]
 categories = ["wasm", "gui"]

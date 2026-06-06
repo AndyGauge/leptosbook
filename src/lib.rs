@@ -1,11 +1,11 @@
-//! # leptoskit
+//! # leptosbook
 //!
 //! SvelteKit-inspired gesture and book-navigation primitives for Leptos.
 //!
 //! ## Quick start
 //!
 //! ```rust,ignore
-//! use leptoskit::prelude::*;
+//! use leptosbook::prelude::*;
 //!
 //! #[component]
 //! fn App() -> impl IntoView {
@@ -37,7 +37,7 @@ pub mod prelude {
     pub use crate::install::InstallPrompt;
 }
 
-/// Default stylesheet.  Inject with `<Style>{leptoskit::FOLIO_CSS}</Style>`
+/// Default stylesheet.  Inject with `<Style>{leptosbook::FOLIO_CSS}</Style>`
 /// or let `<Folio inject_css=true/>` (the default) handle it automatically.
 pub const FOLIO_CSS: &str = r#"
 .folio {

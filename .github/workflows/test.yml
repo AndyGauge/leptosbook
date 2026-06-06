@@ -19,7 +19,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       # Library tests (default features).
-      - run: cargo test -p leptoskit
+      - run: cargo test -p leptosbook
       # Examples are separate member crates (CSR apps), so build them by name.
       - run: cargo build -p basic-folio -p gesture-demo -p onboarding-tour
 
@@ -43,6 +43,6 @@ jobs:
           components: clippy
       - uses: Swatinem/rust-cache@v2
       # ssr and hydrate are mutually exclusive, so lint each feature set on its own.
-      - run: cargo clippy -p leptoskit --no-default-features -- -D warnings
-      - run: cargo clippy -p leptoskit --features ssr -- -D warnings
-      - run: cargo clippy -p leptoskit --features hydrate -- -D warnings
+      - run: cargo clippy -p leptosbook --no-default-features -- -D warnings
+      - run: cargo clippy -p leptosbook --features ssr -- -D warnings
+      - run: cargo clippy -p leptosbook --features hydrate -- -D warnings

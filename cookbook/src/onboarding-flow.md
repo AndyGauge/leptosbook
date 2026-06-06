@@ -6,7 +6,7 @@ footer that turns into a **Get started** button on the last step.
 ```rust
 use std::sync::Arc;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Step { icon: &'static str, title: &'static str, blurb: &'static str }

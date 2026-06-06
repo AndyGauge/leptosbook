@@ -1,12 +1,12 @@
 # Theming and styling
 
-leptoskit ships sensible defaults in the `FOLIO_CSS` constant and injects them
+leptosbook ships sensible defaults in the `FOLIO_CSS` constant and injects them
 automatically. You can layer on top, or take over completely.
 
 ## Layer on top (default)
 
 Leave `inject_css=true` (the default) and just write CSS that targets the
-leptoskit classes — later rules win:
+leptosbook classes — later rules win:
 
 ```rust
 <Folio items=items render=render>   // inject_css defaults to true
@@ -34,7 +34,7 @@ defaults via the `FOLIO_CSS` constant:
 
 ```rust
 <Folio inject_css=false items=items render=render>
-    <style>{leptoskit::FOLIO_CSS}</style>   // start from defaults…
+    <style>{leptosbook::FOLIO_CSS}</style>   // start from defaults…
     <style>{ "/* …then your overrides */" }</style>
     <FolioNav/>
 </Folio>

@@ -11,7 +11,7 @@
 use leptos::ev;
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn App() -> impl IntoView {

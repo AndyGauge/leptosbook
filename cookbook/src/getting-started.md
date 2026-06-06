@@ -1,6 +1,6 @@
 # Getting started
 
-This recipe builds the smallest complete leptoskit app: a swipeable set of cards
+This recipe builds the smallest complete leptosbook app: a swipeable set of cards
 with prev/next buttons.
 
 ## 1. Dependencies
@@ -8,7 +8,7 @@ with prev/next buttons.
 ```toml
 [dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptoskit = "0.1"
+leptosbook = "0.1"
 console_error_panic_hook = "0.1"
 ```
 
@@ -17,7 +17,7 @@ console_error_panic_hook = "0.1"
 ```rust
 use leptos::mount::mount_to_body;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Card { title: &'static str, body: &'static str }
@@ -51,7 +51,7 @@ fn main() {
 
 ## 3. Run it
 
-leptoskit examples use [Trunk](https://trunkrs.dev):
+leptosbook examples use [Trunk](https://trunkrs.dev):
 
 ```bash
 trunk serve --open

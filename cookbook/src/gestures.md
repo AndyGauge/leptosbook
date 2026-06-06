@@ -32,7 +32,7 @@ swipeable surfaces — a dismissible card, a drawer, a rating slider:
 ```rust
 use leptos::ev;
 use leptos::prelude::*;
-use leptoskit::{resolve, SwipeDir};
+use leptosbook::{resolve, SwipeDir};
 
 #[component]
 fn SwipeToDismiss(on_dismiss: impl Fn() + 'static) -> impl IntoView {
@@ -64,7 +64,7 @@ threshold, or `None` if the movement was too small. Horizontal wins ties.
 handlers:
 
 ```rust
-use leptoskit::SwipeConfig;
+use leptosbook::SwipeConfig;
 let cfg = SwipeConfig::default().threshold(100.0).no_keyboard();
 ```
 

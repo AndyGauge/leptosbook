@@ -1,4 +1,4 @@
-# leptoskit Guide
+# leptosbook Guide
 
 A complete tour of building gesture-driven, paginated interfaces with Leptos `0.9`.
 
@@ -18,7 +18,7 @@ A complete tour of building gesture-driven, paginated interfaces with Leptos `0.
 
 ## Mental model
 
-leptoskit is built around one component: **`Folio`**. Think of it as a book.
+leptosbook is built around one component: **`Folio`**. Think of it as a book.
 
 - You hand it a `Signal<Vec<T>>` and a `render` function.
 - It shows exactly **one item at a time**.
@@ -45,7 +45,7 @@ That's the whole architecture. Everything below is detail.
 
 ```rust
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Item { title: String, body: String }
@@ -209,7 +209,7 @@ A turn only fires once travel exceeds `threshold` (default 60px). The trackpad p
 ### Rolling your own with `resolve`
 
 ```rust
-use leptoskit::{resolve, SwipeDir};
+use leptosbook::{resolve, SwipeDir};
 
 // dx, dy are end-minus-start displacements.
 match resolve(dx, dy, 60.0) {
@@ -226,7 +226,7 @@ match resolve(dx, dy, 60.0) {
 ### `SwipeConfig`
 
 ```rust
-use leptoskit::SwipeConfig;
+use leptosbook::SwipeConfig;
 
 let cfg = SwipeConfig::default()  // threshold 60, keyboard + mouse on
     .threshold(100.0)
@@ -272,7 +272,7 @@ shows the standard "Add to Home Screen" share-sheet instructions instead.
 
 ```rust
 <Folio inject_css=false items=items render=render>
-    <style>{leptoskit::FOLIO_CSS}</style>   // start from the defaults…
+    <style>{leptosbook::FOLIO_CSS}</style>   // start from the defaults…
     // …then your overrides, or omit FOLIO_CSS entirely for a clean slate
     <FolioNav/>
 </Folio>
@@ -347,4 +347,4 @@ fn Dots() -> impl IntoView {
 
 ---
 
-For runnable code, see [`examples/`](examples/). For task-focused walkthroughs, see the [cookbook](https://andygauge.github.io/leptoskit).
+For runnable code, see [`examples/`](examples/). For task-focused walkthroughs, see the [cookbook](https://andygauge.github.io/leptosbook).

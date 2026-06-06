@@ -1,4 +1,4 @@
-# leptoskit
+# leptosbook
 
 **SvelteKit-inspired UI primitives for Leptos** — bringing joy and ergonomics to Leptos development.
 
@@ -19,12 +19,12 @@ Gesture-driven book navigation, context-driven state, and a PWA install prompt. 
 ```toml
 [dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptoskit = "0.1"
+leptosbook = "0.1"
 ```
 
 ```rust
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Card { title: &'static str, body: &'static str }
@@ -165,7 +165,7 @@ view! {
 To build your own recognizer, use the gesture module directly:
 
 ```rust
-use leptoskit::{resolve, SwipeDir};
+use leptosbook::{resolve, SwipeDir};
 
 match resolve(dx, dy, 60.0) {
     Some(SwipeDir::Right) => { /* … */ }
@@ -183,7 +183,7 @@ Default styles ship in the `FOLIO_CSS` constant and are injected automatically. 
 
 ```rust
 <Folio inject_css=false items=cards render=render>
-    <style>{leptoskit::FOLIO_CSS}</style>  // or your own
+    <style>{leptosbook::FOLIO_CSS}</style>  // or your own
     <FolioNav/>
 </Folio>
 ```
@@ -208,8 +208,8 @@ trunk serve --open
 ## Documentation
 
 - [Full Guide](GUIDE.md) — every component, prop, and pattern
-- [Cookbook](https://andygauge.github.io/leptoskit) — task-focused recipes
-- [API docs](https://docs.rs/leptoskit) — rustdoc
+- [Cookbook](https://andygauge.github.io/leptosbook) — task-focused recipes
+- [API docs](https://docs.rs/leptosbook) — rustdoc
 
 ## Roadmap
 

@@ -24,7 +24,7 @@ You **navigate by calling the closures** and **read state from the signals**.
 
 ```rust
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn ControlBar() -> impl IntoView {

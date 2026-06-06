@@ -1,6 +1,6 @@
 # Tabs and progress dots
 
-leptoskit ships `FolioTabs` for a labeled tab strip, and it's easy to hand-roll
+leptosbook ships `FolioTabs` for a labeled tab strip, and it's easy to hand-roll
 progress dots. Both follow the same idea: read `current_page` from context, and
 jump with `go_to`.
 
@@ -13,7 +13,7 @@ it up in three lines:
 ```rust
 use std::sync::Arc;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn SectionTabs() -> impl IntoView {
