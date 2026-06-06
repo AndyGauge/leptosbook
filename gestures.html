@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Working with gestures - The leptoskit Cookbook</title>
+        <title>Working with gestures - The leptosbook Cookbook</title>
 
 
         <!-- Custom HTML head -->
@@ -141,16 +141,16 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">The leptoskit Cookbook</h1>
+                    <h1 class="menu-title">The leptosbook Cookbook</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/andygauge/leptosbook" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit/edit/main/cookbook/src/gestures.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/andygauge/leptosbook/edit/main/cookbook/src/gestures.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -207,7 +207,7 @@ swipeable surfaces — a dismissible card, a drawer, a rating slider:</p>
 </span><span class="boring">fn main() {
 </span>use leptos::ev;
 use leptos::prelude::*;
-use leptoskit::{resolve, SwipeDir};
+use leptosbook::{resolve, SwipeDir};
 
 #[component]
 fn SwipeToDismiss(on_dismiss: impl Fn() + 'static) -&gt; impl IntoView {
@@ -236,7 +236,7 @@ threshold, or <code>None</code> if the movement was too small. Horizontal wins t
 handlers:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>use leptoskit::SwipeConfig;
+</span>use leptosbook::SwipeConfig;
 let cfg = SwipeConfig::default().threshold(100.0).no_keyboard();
 <span class="boring">}</span></code></pre></pre>
 <p>It is <strong>not yet</strong> consumed by <code>&lt;Folio&gt;</code> — Folio currently takes only the

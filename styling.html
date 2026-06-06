@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Theming and styling - The leptoskit Cookbook</title>
+        <title>Theming and styling - The leptosbook Cookbook</title>
 
 
         <!-- Custom HTML head -->
@@ -141,16 +141,16 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">The leptoskit Cookbook</h1>
+                    <h1 class="menu-title">The leptosbook Cookbook</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/andygauge/leptosbook" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit/edit/main/cookbook/src/styling.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/andygauge/leptosbook/edit/main/cookbook/src/styling.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -180,11 +180,11 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="theming-and-styling"><a class="header" href="#theming-and-styling">Theming and styling</a></h1>
-<p>leptoskit ships sensible defaults in the <code>FOLIO_CSS</code> constant and injects them
+<p>leptosbook ships sensible defaults in the <code>FOLIO_CSS</code> constant and injects them
 automatically. You can layer on top, or take over completely.</p>
 <h2 id="layer-on-top-default"><a class="header" href="#layer-on-top-default">Layer on top (default)</a></h2>
 <p>Leave <code>inject_css=true</code> (the default) and just write CSS that targets the
-leptoskit classes — later rules win:</p>
+leptosbook classes — later rules win:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>&lt;Folio items=items render=render&gt;   // inject_css defaults to true
@@ -208,7 +208,7 @@ defaults via the <code>FOLIO_CSS</code> constant:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>&lt;Folio inject_css=false items=items render=render&gt;
-    &lt;style&gt;{leptoskit::FOLIO_CSS}&lt;/style&gt;   // start from defaults…
+    &lt;style&gt;{leptosbook::FOLIO_CSS}&lt;/style&gt;   // start from defaults…
     &lt;style&gt;{ "/* …then your overrides */" }&lt;/style&gt;
     &lt;FolioNav/&gt;
 &lt;/Folio&gt;

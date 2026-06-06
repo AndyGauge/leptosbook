@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tabs and progress dots - The leptoskit Cookbook</title>
+        <title>Tabs and progress dots - The leptosbook Cookbook</title>
 
 
         <!-- Custom HTML head -->
@@ -141,16 +141,16 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">The leptoskit Cookbook</h1>
+                    <h1 class="menu-title">The leptosbook Cookbook</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/andygauge/leptosbook" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit/edit/main/cookbook/src/tabs-and-dots.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/andygauge/leptosbook/edit/main/cookbook/src/tabs-and-dots.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
@@ -180,7 +180,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="tabs-and-progress-dots"><a class="header" href="#tabs-and-progress-dots">Tabs and progress dots</a></h1>
-<p>leptoskit ships <code>FolioTabs</code> for a labeled tab strip, and it's easy to hand-roll
+<p>leptosbook ships <code>FolioTabs</code> for a labeled tab strip, and it's easy to hand-roll
 progress dots. Both follow the same idea: read <code>current_page</code> from context, and
 jump with <code>go_to</code>.</p>
 <h2 id="foliotabs-wired-to-a-folio"><a class="header" href="#foliotabs-wired-to-a-folio">FolioTabs, wired to a folio</a></h2>
@@ -191,7 +191,7 @@ it up in three lines:</p>
 </span><span class="boring">fn main() {
 </span>use std::sync::Arc;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn SectionTabs() -&gt; impl IntoView {

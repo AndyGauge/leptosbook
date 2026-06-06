@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>The leptoskit Cookbook</title>
+        <title>The leptosbook Cookbook</title>
         <meta name="robots" content="noindex">
 
 
@@ -142,13 +142,13 @@
                         </button>
                     </div>
 
-                    <h1 class="menu-title">The leptoskit Cookbook</h1>
+                    <h1 class="menu-title">The leptosbook Cookbook</h1>
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        <a href="https://github.com/andygauge/leptoskit" title="Git repository" aria-label="Git repository">
+                        <a href="https://github.com/andygauge/leptosbook" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
 
@@ -177,16 +177,16 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="the-leptoskit-cookbook"><a class="header" href="#the-leptoskit-cookbook">The leptoskit Cookbook</a></h1>
-<p>leptoskit gives Leptos a small set of primitives for <strong>paginated, gesture-driven
+                        <h1 id="the-leptosbook-cookbook"><a class="header" href="#the-leptosbook-cookbook">The leptosbook Cookbook</a></h1>
+<p>leptosbook gives Leptos a small set of primitives for <strong>paginated, gesture-driven
 interfaces</strong> — image carousels, onboarding flows, slide decks, swipeable
 dashboards, wizards, anything where the user moves through a sequence one screen
 at a time.</p>
 <p>This cookbook is task-focused. Each chapter solves one concrete problem with a
 complete, copy-pasteable snippet. If you want the full prop-by-prop reference,
-read the <a href="https://github.com/andygauge/leptoskit/blob/main/GUIDE.md">Guide</a>
+read the <a href="https://github.com/andygauge/leptosbook/blob/main/GUIDE.md">Guide</a>
 instead; if you want runnable apps, see the
-<a href="https://github.com/andygauge/leptoskit/tree/main/examples"><code>examples/</code></a> directory.</p>
+<a href="https://github.com/andygauge/leptosbook/tree/main/examples"><code>examples/</code></a> directory.</p>
 <h2 id="the-one-component-you-need-to-know"><a class="header" href="#the-one-component-you-need-to-know">The one component you need to know</a></h2>
 <p>Everything starts with <code>Folio</code>: hand it a <code>Signal&lt;Vec&lt;T&gt;&gt;</code> and a <code>render</code>
 function, and it shows one item at a time with swipe, trackpad, mouse, and
@@ -195,7 +195,7 @@ navigation through <code>use_folio_context()</code>.</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn Carousel(slides: Signal&lt;Vec&lt;String&gt;&gt;) -&gt; impl IntoView {
@@ -209,21 +209,21 @@ fn Carousel(slides: Signal&lt;Vec&lt;String&gt;&gt;) -&gt; impl IntoView {
 <p>Targets Leptos <code>0.9</code>. Add it with:</p>
 <pre><code class="language-toml">[dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptoskit = "0.1"
+leptosbook = "0.1"
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
-<p>This recipe builds the smallest complete leptoskit app: a swipeable set of cards
+<p>This recipe builds the smallest complete leptosbook app: a swipeable set of cards
 with prev/next buttons.</p>
 <h2 id="1-dependencies"><a class="header" href="#1-dependencies">1. Dependencies</a></h2>
 <pre><code class="language-toml">[dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptoskit = "0.1"
+leptosbook = "0.1"
 console_error_panic_hook = "0.1"
 </code></pre>
 <h2 id="2-the-app"><a class="header" href="#2-the-app">2. The app</a></h2>
 <pre><pre class="playground"><code class="language-rust">use leptos::mount::mount_to_body;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Card { title: &amp;'static str, body: &amp;'static str }
@@ -254,7 +254,7 @@ fn main() {
     mount_to_body(|| view! { &lt;App/&gt; });
 }</code></pre></pre>
 <h2 id="3-run-it"><a class="header" href="#3-run-it">3. Run it</a></h2>
-<p>leptoskit examples use <a href="https://trunkrs.dev">Trunk</a>:</p>
+<p>leptosbook examples use <a href="https://trunkrs.dev">Trunk</a>:</p>
 <pre><code class="language-bash">trunk serve --open
 </code></pre>
 <p>You need an <code>index.html</code> next to <code>Cargo.toml</code>:</p>
@@ -279,7 +279,7 @@ pattern.</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Photo { url: &amp;'static str, caption: &amp;'static str }
@@ -332,7 +332,7 @@ footer that turns into a <strong>Get started</strong> button on the last step.</
 </span><span class="boring">fn main() {
 </span>use std::sync::Arc;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[derive(Clone)]
 struct Step { icon: &amp;'static str, title: &amp;'static str, blurb: &amp;'static str }
@@ -418,7 +418,7 @@ button, a step label, a "skip to end" link. Any descendant of <code>&lt;Folio&gt
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn ControlBar() -&gt; impl IntoView {
@@ -472,7 +472,7 @@ Effect::new(move |_| {
 view! { &lt;button on:click=move |_| go_next()&gt;"Next"&lt;/button&gt; }
 <span class="boring">}</span></code></pre></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="tabs-and-progress-dots"><a class="header" href="#tabs-and-progress-dots">Tabs and progress dots</a></h1>
-<p>leptoskit ships <code>FolioTabs</code> for a labeled tab strip, and it's easy to hand-roll
+<p>leptosbook ships <code>FolioTabs</code> for a labeled tab strip, and it's easy to hand-roll
 progress dots. Both follow the same idea: read <code>current_page</code> from context, and
 jump with <code>go_to</code>.</p>
 <h2 id="foliotabs-wired-to-a-folio"><a class="header" href="#foliotabs-wired-to-a-folio">FolioTabs, wired to a folio</a></h2>
@@ -483,7 +483,7 @@ it up in three lines:</p>
 </span><span class="boring">fn main() {
 </span>use std::sync::Arc;
 use leptos::prelude::*;
-use leptoskit::prelude::*;
+use leptosbook::prelude::*;
 
 #[component]
 fn SectionTabs() -&gt; impl IntoView {
@@ -574,7 +574,7 @@ swipeable surfaces — a dismissible card, a drawer, a rating slider:</p>
 </span><span class="boring">fn main() {
 </span>use leptos::ev;
 use leptos::prelude::*;
-use leptoskit::{resolve, SwipeDir};
+use leptosbook::{resolve, SwipeDir};
 
 #[component]
 fn SwipeToDismiss(on_dismiss: impl Fn() + 'static) -&gt; impl IntoView {
@@ -603,18 +603,18 @@ threshold, or <code>None</code> if the movement was too small. Horizontal wins t
 handlers:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>use leptoskit::SwipeConfig;
+</span>use leptosbook::SwipeConfig;
 let cfg = SwipeConfig::default().threshold(100.0).no_keyboard();
 <span class="boring">}</span></code></pre></pre>
 <p>It is <strong>not yet</strong> consumed by <code>&lt;Folio&gt;</code> — Folio currently takes only the
 <code>threshold</code> prop and always listens for all input types. Wiring <code>SwipeConfig</code>
 into Folio (to, say, disable keyboard nav) is on the roadmap.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="theming-and-styling"><a class="header" href="#theming-and-styling">Theming and styling</a></h1>
-<p>leptoskit ships sensible defaults in the <code>FOLIO_CSS</code> constant and injects them
+<p>leptosbook ships sensible defaults in the <code>FOLIO_CSS</code> constant and injects them
 automatically. You can layer on top, or take over completely.</p>
 <h2 id="layer-on-top-default"><a class="header" href="#layer-on-top-default">Layer on top (default)</a></h2>
 <p>Leave <code>inject_css=true</code> (the default) and just write CSS that targets the
-leptoskit classes — later rules win:</p>
+leptosbook classes — later rules win:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>&lt;Folio items=items render=render&gt;   // inject_css defaults to true
@@ -638,7 +638,7 @@ defaults via the <code>FOLIO_CSS</code> constant:</p>
 <pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>&lt;Folio inject_css=false items=items render=render&gt;
-    &lt;style&gt;{leptoskit::FOLIO_CSS}&lt;/style&gt;   // start from defaults…
+    &lt;style&gt;{leptosbook::FOLIO_CSS}&lt;/style&gt;   // start from defaults…
     &lt;style&gt;{ "/* …then your overrides */" }&lt;/style&gt;
     &lt;FolioNav/&gt;
 &lt;/Folio&gt;
