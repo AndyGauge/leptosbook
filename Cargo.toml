@@ -1,0 +1,42 @@
+[package]
+name = "leptoskit"
+version = "0.1.0"
+edition = "2021"
+description = "SvelteKit-inspired UI primitives for Leptos — gestures, book navigation, context-driven components"
+repository = "https://github.com/andygauge/leptoskit"
+documentation = "https://docs.rs/leptoskit"
+license = "MIT OR Apache-2.0"
+keywords = ["leptos", "ui", "gestures", "pagination", "book"]
+categories = ["wasm", "gui"]
+readme = "README.md"
+exclude = ["examples/", "cookbook/", ".github/"]
+
+[features]
+default = []
+ssr = ["leptos/ssr", "leptos_meta/ssr"]
+hydrate = ["leptos/hydrate"]
+
+[dependencies]
+leptos = { version = "0.9.0-alpha" }
+leptos_meta = { version = "0.9.0-alpha" }
+web-sys = { version = "0.3", features = [
+  "EventTarget",
+  "KeyboardEvent",
+  "MouseEvent",
+  "Touch",
+  "TouchEvent",
+  "TouchList",
+  "WheelEvent",
+  "Window",
+  "Location",
+  "CustomEvent",
+  "SubmitEvent",
+  "Navigator",
+  "MediaQueryList",
+  "Storage",
+] }
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+
+[workspace]
+members = ["examples/*"]

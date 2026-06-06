@@ -1,0 +1,16 @@
+[book]
+title = "The leptoskit Cookbook"
+authors = ["andygauge"]
+description = "Task-focused recipes for building gesture-driven, paginated UIs with Leptos."
+language = "en"
+src = "src"
+
+[output.html]
+default-theme = "navy"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/andygauge/leptoskit"
+edit-url-template = "https://github.com/andygauge/leptoskit/edit/main/cookbook/{path}"
+
+[output.html.fold]
+enable = true
+level = 1
