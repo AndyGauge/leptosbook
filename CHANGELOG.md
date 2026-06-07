@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-06-06
+
 First public release, extracted from a real-world Leptos app.
 
 ### Added
@@ -48,3 +50,6 @@ First public release, extracted from a real-world Leptos app.
 - Wire `SwipeConfig` (keyboard/mouse toggles) into `<Folio>`.
 - Carousel / wrap-around mode.
 - Virtualization for very large lists.
+
+[Unreleased]: https://github.com/AndyGauge/leptosbook/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/AndyGauge/leptosbook/releases/tag/v0.1.0
