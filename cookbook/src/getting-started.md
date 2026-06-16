@@ -51,7 +51,7 @@ fn main() {
 
 ## 3. Run it
 
-leptosbook examples use [Trunk](https://trunkrs.dev):
+leptosbook examples use [Trunk](https://trunk-rs.github.io/trunk/):
 
 ```bash
 trunk serve --open
