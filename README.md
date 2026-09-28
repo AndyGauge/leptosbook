@@ -20,7 +20,7 @@ Gesture-driven book navigation, context-driven state, and a PWA install prompt. 
 ```toml
 [dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptosbook = "0.1"
+leptosbook = "0.2"
 ```
 
 ```rust

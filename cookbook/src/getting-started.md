@@ -8,7 +8,7 @@ with prev/next buttons.
 ```toml
 [dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptosbook = "0.1"
+leptosbook = "0.2"
 console_error_panic_hook = "0.1"
 ```
 

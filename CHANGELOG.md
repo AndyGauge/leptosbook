@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-27
+
 ### Added
 
 - **`use_folio_lock(when)`** — hold the surrounding `<Folio>` on its current page
@@ -72,5 +74,6 @@ First public release, extracted from a real-world Leptos app.
 - Carousel / wrap-around mode.
 - Virtualization for very large lists.
 
-[Unreleased]: https://github.com/AndyGauge/leptosbook/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/AndyGauge/leptosbook/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/AndyGauge/leptosbook/releases/tag/v0.2.0
 [0.1.0]: https://github.com/AndyGauge/leptosbook/releases/tag/v0.1.0
