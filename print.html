@@ -89,7 +89,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="image-carousel.html"><strong aria-hidden="true">2.</strong> An image carousel</a></li><li class="chapter-item expanded "><a href="onboarding-flow.html"><strong aria-hidden="true">3.</strong> An onboarding flow</a></li><li class="chapter-item expanded "><a href="custom-navigation.html"><strong aria-hidden="true">4.</strong> Custom navigation from context</a></li><li class="chapter-item expanded "><a href="tabs-and-dots.html"><strong aria-hidden="true">5.</strong> Tabs and progress dots</a></li><li class="chapter-item expanded "><a href="gestures.html"><strong aria-hidden="true">6.</strong> Working with gestures</a></li><li class="chapter-item expanded "><a href="styling.html"><strong aria-hidden="true">7.</strong> Theming and styling</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="image-carousel.html"><strong aria-hidden="true">2.</strong> An image carousel</a></li><li class="chapter-item expanded "><a href="onboarding-flow.html"><strong aria-hidden="true">3.</strong> An onboarding flow</a></li><li class="chapter-item expanded "><a href="custom-navigation.html"><strong aria-hidden="true">4.</strong> Custom navigation from context</a></li><li class="chapter-item expanded "><a href="tabs-and-dots.html"><strong aria-hidden="true">5.</strong> Tabs and progress dots</a></li><li class="chapter-item expanded "><a href="gestures.html"><strong aria-hidden="true">6.</strong> Working with gestures</a></li><li class="chapter-item expanded "><a href="forms.html"><strong aria-hidden="true">7.</strong> Forms inside a page</a></li><li class="chapter-item expanded "><a href="styling.html"><strong aria-hidden="true">8.</strong> Theming and styling</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -209,7 +209,7 @@ fn Carousel(slides: Signal&lt;Vec&lt;String&gt;&gt;) -&gt; impl IntoView {
 <p>Targets Leptos <code>0.9</code>. Add it with:</p>
 <pre><code class="language-toml">[dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptosbook = "0.1"
+leptosbook = "0.2"
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started"><a class="header" href="#getting-started">Getting started</a></h1>
 <p>This recipe builds the smallest complete leptosbook app: a swipeable set of cards
@@ -217,7 +217,7 @@ with prev/next buttons.</p>
 <h2 id="1-dependencies"><a class="header" href="#1-dependencies">1. Dependencies</a></h2>
 <pre><code class="language-toml">[dependencies]
 leptos = { version = "0.9.0-alpha", features = ["csr"] }
-leptosbook = "0.1"
+leptosbook = "0.2"
 console_error_panic_hook = "0.1"
 </code></pre>
 <h2 id="2-the-app"><a class="header" href="#2-the-app">2. The app</a></h2>
@@ -558,6 +558,12 @@ elements.</p>
 <tr><td><code>ArrowLeft</code> / <code>ArrowUp</code> / <code>PageUp</code></td><td>prev</td></tr>
 </tbody></table>
 </div>
+<p>Input aimed at a form field never turns the page: keys typed into an <code>input</code>,
+<code>textarea</code>, <code>select</code> or <code>contenteditable</code>, and drags that start in one, are left
+to the field. <code>Space</code> on a focused button or link activates it instead of paging,
+and a key your own handler has already <code>prevent_default()</code>ed is ignored.</p>
+<p>To freeze navigation entirely while a form is open, see
+<a href="./forms.html">Forms inside a page</a>.</p>
 <h2 id="tuning-sensitivity"><a class="header" href="#tuning-sensitivity">Tuning sensitivity</a></h2>
 <p>A turn fires once pointer travel exceeds <code>threshold</code> (px). Raise it to require a
 more deliberate swipe; lower it for a hair-trigger:</p>
@@ -609,6 +615,63 @@ let cfg = SwipeConfig::default().threshold(100.0).no_keyboard();
 <p>It is <strong>not yet</strong> consumed by <code>&lt;Folio&gt;</code> — Folio currently takes only the
 <code>threshold</code> prop and always listens for all input types. Wiring <code>SwipeConfig</code>
 into Folio (to, say, disable keyboard nav) is on the roadmap.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="forms-inside-a-page"><a class="header" href="#forms-inside-a-page">Forms inside a page</a></h1>
+<p>Pages often hold a small form: a reply box, a rating, a note. Two things keep
+the folio from fighting it.</p>
+<h2 id="form-fields-keep-their-input"><a class="header" href="#form-fields-keep-their-input">Form fields keep their input</a></h2>
+<p>You don't have to do anything for this part. <code>&lt;Folio&gt;</code> ignores input aimed at a
+form field:</p>
+<ul>
+<li>keys typed into an <code>input</code>, <code>textarea</code>, <code>select</code> or <code>contenteditable</code> element
+(so <code>Space</code> and the arrow keys edit text instead of turning the page);</li>
+<li>mouse drags and touch swipes that <em>start</em> in one (text selection, not a swipe);</li>
+<li><code>Space</code> on a focused button or link, which activates it;</li>
+<li>any key your own handler already called <code>prevent_default()</code> on.</li>
+</ul>
+<h2 id="lock-the-page-while-the-form-is-open"><a class="header" href="#lock-the-page-while-the-form-is-open">Lock the page while the form is open</a></h2>
+<p>Focus can leave the field (onto a Submit button, say) and a phone swipe can land
+outside it. If turning the page would throw away what the user typed, hold a lock
+with <code>use_folio_lock</code> for as long as the form is open:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>use leptos::prelude::*;
+use leptosbook::prelude::*;
+
+#[component]
+fn NoteForm() -&gt; impl IntoView {
+    let (open, set_open) = signal(false);
+    let (text, set_text) = signal(String::new());
+
+    // Locked exactly while `open` is true; released on unmount.
+    use_folio_lock(open);
+
+    view! {
+        &lt;Show
+            when=move || open.get()
+            fallback=move || view! {
+                &lt;button on:click=move |_| set_open.set(true)&gt;"Add a note"&lt;/button&gt;
+            }
+        &gt;
+            &lt;textarea
+                prop:value=text
+                on:input=move |e| set_text.set(event_target_value(&amp;e))
+            /&gt;
+            &lt;button on:click=move |_| set_open.set(false)&gt;"Done"&lt;/button&gt;
+        &lt;/Show&gt;
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Render it from your <code>Folio</code>'s <code>render</code> closure; like <code>use_folio_context</code>, the
+hook must run inside a <code>&lt;Folio&gt;</code>.</p>
+<p>While any lock is held:</p>
+<ul>
+<li>keys, swipes, drags and the trackpad don't turn the page;</li>
+<li><code>go_next</code>, <code>go_prev</code> and <code>go_to</code> are no-ops;</li>
+<li><code>&lt;FolioNav/&gt;</code> disables both buttons.</li>
+</ul>
+<p>Locks nest, so several forms can each hold one; the folio unlocks when the last
+is released. Read <code>use_folio_context().locked</code> to disable your own navigation
+controls the same way.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="theming-and-styling"><a class="header" href="#theming-and-styling">Theming and styling</a></h1>
 <p>leptosbook ships sensible defaults in the <code>FOLIO_CSS</code> constant and injects them
 automatically. You can layer on top, or take over completely.</p>

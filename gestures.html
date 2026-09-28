@@ -88,7 +88,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="image-carousel.html"><strong aria-hidden="true">2.</strong> An image carousel</a></li><li class="chapter-item expanded "><a href="onboarding-flow.html"><strong aria-hidden="true">3.</strong> An onboarding flow</a></li><li class="chapter-item expanded "><a href="custom-navigation.html"><strong aria-hidden="true">4.</strong> Custom navigation from context</a></li><li class="chapter-item expanded "><a href="tabs-and-dots.html"><strong aria-hidden="true">5.</strong> Tabs and progress dots</a></li><li class="chapter-item expanded "><a href="gestures.html" class="active"><strong aria-hidden="true">6.</strong> Working with gestures</a></li><li class="chapter-item expanded "><a href="styling.html"><strong aria-hidden="true">7.</strong> Theming and styling</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="getting-started.html"><strong aria-hidden="true">1.</strong> Getting started</a></li><li class="chapter-item expanded "><a href="image-carousel.html"><strong aria-hidden="true">2.</strong> An image carousel</a></li><li class="chapter-item expanded "><a href="onboarding-flow.html"><strong aria-hidden="true">3.</strong> An onboarding flow</a></li><li class="chapter-item expanded "><a href="custom-navigation.html"><strong aria-hidden="true">4.</strong> Custom navigation from context</a></li><li class="chapter-item expanded "><a href="tabs-and-dots.html"><strong aria-hidden="true">5.</strong> Tabs and progress dots</a></li><li class="chapter-item expanded "><a href="gestures.html" class="active"><strong aria-hidden="true">6.</strong> Working with gestures</a></li><li class="chapter-item expanded "><a href="forms.html"><strong aria-hidden="true">7.</strong> Forms inside a page</a></li><li class="chapter-item expanded "><a href="styling.html"><strong aria-hidden="true">8.</strong> Theming and styling</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -191,6 +191,12 @@ elements.</p>
 <tr><td><code>ArrowLeft</code> / <code>ArrowUp</code> / <code>PageUp</code></td><td>prev</td></tr>
 </tbody></table>
 </div>
+<p>Input aimed at a form field never turns the page: keys typed into an <code>input</code>,
+<code>textarea</code>, <code>select</code> or <code>contenteditable</code>, and drags that start in one, are left
+to the field. <code>Space</code> on a focused button or link activates it instead of paging,
+and a key your own handler has already <code>prevent_default()</code>ed is ignored.</p>
+<p>To freeze navigation entirely while a form is open, see
+<a href="./forms.html">Forms inside a page</a>.</p>
 <h2 id="tuning-sensitivity"><a class="header" href="#tuning-sensitivity">Tuning sensitivity</a></h2>
 <p>A turn fires once pointer travel exceeds <code>threshold</code> (px). Raise it to require a
 more deliberate swipe; lower it for a hair-trigger:</p>
@@ -251,7 +257,7 @@ into Folio (to, say, disable keyboard nav) is on the roadmap.</p>
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="styling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="forms.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -265,7 +271,7 @@ into Folio (to, say, disable keyboard nav) is on the roadmap.</p>
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="styling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="forms.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
