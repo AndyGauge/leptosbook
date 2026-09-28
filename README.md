@@ -10,6 +10,7 @@ Gesture-driven book navigation, context-driven state, and a PWA install prompt. 
 - **`<FolioNav>`** — Prev/next buttons with a page counter and auto-disable at the ends
 - **`<FolioTabs>`** — A tab bar that jumps to any page
 - **`use_folio_context()`** — Drive or read navigation from any descendant component
+- **`use_folio_lock()`** — Hold the current page while a form on it is open
 - **`<InstallPrompt>`** — "Add to Home Screen" prompt for iOS and Chrome/Android
 - **Gesture toolkit** — `resolve()`, `SwipeDir`, `SwipeConfig` for rolling your own
 - **Animated transitions** — Slide-in animations keyed to turn direction
@@ -130,6 +131,8 @@ pub struct FolioContext {
     pub go_to:   Arc<dyn Fn(usize) + Send + Sync>, // jump to an index (clamped)
     pub anim_epoch: ReadSignal<u64>,            // increments every turn
     pub last_dir:   ReadSignal<Option<TurnDir>>,// Forward / Backward
+    pub locked:     Signal<bool>,               // true while a use_folio_lock holds it
+    // (plus a private lock counter, so construct it only via <Folio>)
 }
 ```
 
@@ -151,6 +154,27 @@ view! {
 
 `TurnDir` has exactly two variants — `Forward` and `Backward` — and is reported via `last_dir` so you can react to (or animate) the direction of the most recent turn.
 
+## Forms on a page: `use_folio_lock()`
+
+To keep the folio on the current page while the user fills in a form (so a stray
+arrow key or swipe can't turn the page and discard their input), hold a lock:
+
+```rust
+use leptosbook::use_folio_lock;
+
+#[component]
+fn ReplyBox() -> impl IntoView {
+    let (open, set_open) = signal(false);
+    use_folio_lock(open); // locked exactly while `open` is true
+    // …
+}
+```
+
+While any lock is held, every page turn is ignored: keys, swipes, wheel, and
+`go_next` / `go_prev` / `go_to`. `FolioNav` disables its buttons, and
+`FolioContext::locked` lets your own controls do the same. Locks nest, and a
+component's lock is released automatically when it unmounts.
+
 ## Gestures
 
 `<Folio>` recognizes these out of the box:
@@ -161,6 +185,11 @@ view! {
 | Swipe / drag left, scroll left | Previous page |
 | `ArrowRight` / `ArrowDown` / `PageDown` / `Space` | Next page |
 | `ArrowLeft` / `ArrowUp` / `PageUp` | Previous page |
+
+Input aimed at a form field never turns the page: keys typed into an `input`,
+`textarea`, `select` or `contenteditable`, and drags that start in one, are left
+to the field. `Space` on a focused button or link activates it instead of paging,
+and a key your own handler has already `prevent_default()`ed is ignored.
 
 To build your own recognizer, use the gesture module directly:
 

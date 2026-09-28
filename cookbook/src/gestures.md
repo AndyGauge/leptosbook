@@ -13,6 +13,14 @@ elements.
 | `ArrowRight` / `ArrowDown` / `PageDown` / `Space` | next |
 | `ArrowLeft` / `ArrowUp` / `PageUp` | prev |
 
+Input aimed at a form field never turns the page: keys typed into an `input`,
+`textarea`, `select` or `contenteditable`, and drags that start in one, are left
+to the field. `Space` on a focused button or link activates it instead of paging,
+and a key your own handler has already `prevent_default()`ed is ignored.
+
+To freeze navigation entirely while a form is open, see
+[Forms inside a page](./forms.md).
+
 ## Tuning sensitivity
 
 A turn fires once pointer travel exceeds `threshold` (px). Raise it to require a

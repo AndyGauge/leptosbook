@@ -8,4 +8,5 @@
 - [Custom navigation from context](./custom-navigation.md)
 - [Tabs and progress dots](./tabs-and-dots.md)
 - [Working with gestures](./gestures.md)
+- [Forms inside a page](./forms.md)
 - [Theming and styling](./styling.md)

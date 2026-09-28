@@ -25,13 +25,13 @@ pub mod folio;
 pub mod gesture;
 pub mod install;
 
-pub use context::{use_folio_context, FolioContext, TurnDir};
+pub use context::{use_folio_context, use_folio_lock, FolioContext, TurnDir};
 pub use folio::{Folio, FolioNav, FolioTabs};
 pub use gesture::{resolve, SwipeConfig, SwipeDir};
 pub use install::InstallPrompt;
 
 pub mod prelude {
-    pub use crate::context::{use_folio_context, FolioContext, TurnDir};
+    pub use crate::context::{use_folio_context, use_folio_lock, FolioContext, TurnDir};
     pub use crate::folio::{Folio, FolioNav, FolioTabs};
     pub use crate::gesture::{resolve, SwipeConfig, SwipeDir};
     pub use crate::install::InstallPrompt;

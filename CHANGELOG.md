@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- **`use_folio_lock(when)`** — hold the surrounding `<Folio>` on its current page
+  while `when` is true (e.g. while a form is open). Every page turn is ignored
+  while any lock is held, including `go_next` / `go_prev` / `go_to`; `FolioNav`
+  disables its buttons. Locks nest and release on unmount.
+- `FolioContext::locked: Signal<bool>` to reflect the lock in custom controls.
+
+### Fixed
+
+- Typing in a form field inside a page no longer turns it: keys aimed at an
+  `input`, `textarea`, `select` or `contenteditable` (e.g. `Space`) are left to
+  the field, and drags/swipes that start in one aren't treated as page swipes.
+- `Space` on a focused button or link activates it instead of turning the page.
+- Keys already handled with `prevent_default()` no longer turn the page.
+
+### Changed
+
+- **Breaking:** `FolioContext` gained a private field, so it can no longer be
+  built with a struct literal outside the crate (it is provided by `<Folio>`).
+
 ## [0.1.0] - 2026-06-06
 
 First public release, extracted from a real-world Leptos app.

@@ -151,6 +151,9 @@ pub struct FolioContext {
     pub go_to:   Arc<dyn Fn(usize) + Send + Sync + 'static>,
     pub anim_epoch: ReadSignal<u64>,
     pub last_dir:   ReadSignal<Option<TurnDir>>,
+    /// True while any `use_folio_lock` holds the folio.
+    pub locked:     Signal<bool>,
+    // plus a private lock counter: FolioContext is only built by <Folio>
 }
 
 pub enum TurnDir { Forward, Backward }
@@ -205,6 +208,33 @@ The Folio clamps and computes direction internally (e.g. `go_to` figures out whe
 | `ArrowLeft` / `ArrowUp` / `PageUp` | prev |
 
 A turn only fires once travel exceeds `threshold` (default 60px). The trackpad path debounces so one flick = one page.
+
+Input aimed at a form field never turns the page: keys typed into an `input`,
+`textarea`, `select` or `contenteditable`, and drags that start in one, are left
+to the field. `Space` on a focused button or link activates it instead of paging,
+and a key your own handler has already `prevent_default()`ed is ignored.
+
+### Forms on a page: `use_folio_lock()`
+
+To keep the folio on the current page while the user fills in a form (so a stray
+arrow key or swipe can't turn the page and discard their input), hold a lock:
+
+```rust
+use leptosbook::use_folio_lock;
+
+#[component]
+fn ReplyBox() -> impl IntoView {
+    let (open, set_open) = signal(false);
+    use_folio_lock(open); // locked exactly while `open` is true
+    // …
+}
+```
+
+While any lock is held, every page turn is ignored: keys, swipes, wheel, and
+`go_next` / `go_prev` / `go_to`. `FolioNav` disables its buttons, and
+`FolioContext::locked` lets your own controls do the same. Locks nest, and a
+component's lock is released automatically when it unmounts.
+
 
 ### Rolling your own with `resolve`
 

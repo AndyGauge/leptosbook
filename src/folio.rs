@@ -50,9 +50,16 @@ where
     let (wheel_acc, set_wheel_acc) = signal(0.0f64);
     let (wheel_locked, set_wheel_locked) = signal(false);
 
+    // Held by `use_folio_lock` callers; while > 0 no page turn happens.
+    let lock_count = RwSignal::new(0u32);
+    let locked = Signal::derive(move || lock_count.get() > 0);
+
     // ── Turn ──────────────────────────────────────────────────────────────
     // Wrap in Arc so we can clone into several event-handler closures.
     let do_turn: Arc<dyn Fn(SwipeDir) + Send + Sync> = Arc::new(move |dir: SwipeDir| {
+        if lock_count.get_untracked() > 0 {
+            return;
+        }
         let total = items.get().len();
         let cur = current_page.get_untracked();
         let (next, tdir) = match dir {
@@ -106,6 +113,8 @@ where
         go_to,
         anim_epoch,
         last_dir,
+        locked,
+        lock_count,
     });
 
     // Clone do_turn for each event handler
@@ -125,6 +134,11 @@ where
 
             // Touch
             on:touchstart=move |e: ev::TouchEvent| {
+                // A drag that starts in a form field is text selection, not a swipe.
+                if in_form_field(&e) {
+                    set_touch_start.set(None);
+                    return;
+                }
                 if let Some(t) = e.touches().item(0) {
                     set_touch_start.set(Some((t.client_x() as f64, t.client_y() as f64)));
                 }
@@ -141,6 +155,10 @@ where
 
             // Mouse drag
             on:mousedown=move |e: ev::MouseEvent| {
+                if in_form_field(&e) {
+                    set_mouse_start.set(None);
+                    return;
+                }
                 set_mouse_start.set(Some((e.client_x() as f64, e.client_y() as f64)));
             }
             on:mouseup=move |e: ev::MouseEvent| {
@@ -157,7 +175,7 @@ where
             on:wheel=move |e: ev::WheelEvent| {
                 let dx = e.delta_x();
                 let dy = e.delta_y();
-                if dx.abs() <= dy.abs() { return; }
+                if dx.abs() <= dy.abs() || in_form_field(&e) { return; }
                 e.prevent_default();
                 if wheel_locked.get_untracked() { return; }
                 let acc = wheel_acc.get_untracked() + dx;
@@ -184,7 +202,17 @@ where
 
             // Keyboard
             on:keydown=move |e: ev::KeyboardEvent| {
-                let dir = match e.key().as_str() {
+                // Keys typed into a field are text; Space on a focused button or
+                // link activates it; a handler that already called
+                // `prevent_default()` has claimed the key.
+                let key = e.key();
+                if e.default_prevented()
+                    || in_form_field(&e)
+                    || (key == " " && on_activatable(&e))
+                {
+                    return;
+                }
+                let dir = match key.as_str() {
                     "ArrowRight" | "ArrowDown" | "PageDown" | " " => Some(SwipeDir::Right),
                     "ArrowLeft"  | "ArrowUp"   | "PageUp"         => Some(SwipeDir::Left),
                     _ => None,
@@ -225,6 +253,37 @@ where
     }
 }
 
+// ─── Event targets ─────────────────────────────────────────────────────────
+
+/// The element an event was aimed at, if any.
+fn target_element(e: &web_sys::Event) -> Option<web_sys::Element> {
+    use wasm_bindgen::JsCast as _;
+    e.target()?.dyn_into::<web_sys::Element>().ok()
+}
+
+/// True if the event started inside a text field, select, or editable region —
+/// input there belongs to the field, never to page navigation.
+fn in_form_field(e: &web_sys::Event) -> bool {
+    target_element(e)
+        .and_then(|el| {
+            el.closest("input, textarea, select, [contenteditable]:not([contenteditable='false'])")
+                .ok()
+                .flatten()
+        })
+        .is_some()
+}
+
+/// True if the event's target is (inside) a button or link, which Space activates.
+fn on_activatable(e: &web_sys::Event) -> bool {
+    target_element(e)
+        .and_then(|el| {
+            el.closest("button, a[href], [role='button']")
+                .ok()
+                .flatten()
+        })
+        .is_some()
+}
+
 // ─── FolioNav ──────────────────────────────────────────────────────────────
 
 #[component]
@@ -235,8 +294,9 @@ pub fn FolioNav(
     let ctx = crate::context::use_folio_context();
     let prev_fn = ctx.go_prev.clone();
     let next_fn = ctx.go_next.clone();
-    let at_start = move || ctx.current_page.get() == 0;
-    let at_end = move || ctx.current_page.get() + 1 >= ctx.total_pages.get();
+    let locked = ctx.locked;
+    let at_start = move || locked.get() || ctx.current_page.get() == 0;
+    let at_end = move || locked.get() || ctx.current_page.get() + 1 >= ctx.total_pages.get();
     let page_label = move || {
         let t = ctx.total_pages.get();
         if t == 0 {
